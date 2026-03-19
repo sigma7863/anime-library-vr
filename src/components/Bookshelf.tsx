@@ -2,28 +2,31 @@
 
 import { useState } from 'react'
 import { useRef } from 'react'
-import { Mesh, Group } from 'three'
-import { useFrame } from '@react-three/fiber'
+import { Group } from 'three'
 import { Text } from '@react-three/drei'
 import Book from './Book'
+import { aozoraBooks, AozoraBook } from '@/data/aozora'
 
 interface BookshelfProps {
   position: [number, number, number]
-  onBookClick: (book: any) => void
+  onBookClick: (book: AozoraBook) => void
+  shelfIndex: number
+  label: string
 }
 
-export default function Bookshelf({ position, onBookClick }: BookshelfProps) {
+const ROWS = 3
+const COLS = 4
+const BOOK_SPACING = 1.0
+const START_X = -1.5
+const ROW_HEIGHTS = [0.55, 1.05, 1.55]
+
+export default function Bookshelf({ position, onBookClick, shelfIndex, label }: BookshelfProps) {
   const shelfRef = useRef<Group>(null)
   const [hoveredBook, setHoveredBook] = useState<string | null>(null)
-
-  const books = [
-    { id: 'book1', title: '日本の神話', color: '#FF6B9D', author: '太安万呂' },
-    { id: 'book2', title: '源氏物語', color: '#C44569', author: '紫式部' },
-    { id: 'book3', title: '枕草子', color: '#F8B195', author: '清少納言' },
-    { id: 'book4', title: '徒然草', color: '#F67280', author: '吉田兼好' },
-    { id: 'book5', title: '奥の細道', color: '#355C7D', author: '松尾芭蕉' },
-    { id: 'book6', title: '雨月物語', color: '#6C5B7B', author: '上田秋成' },
-  ]
+  const offset = shelfIndex * ROWS * COLS
+  const shelfBooks = Array.from({ length: ROWS * COLS }, (_, index) => {
+    return aozoraBooks[(offset + index) % aozoraBooks.length]
+  })
 
   return (
     <group ref={shelfRef} position={position}>
@@ -63,27 +66,22 @@ export default function Bookshelf({ position, onBookClick }: BookshelfProps) {
       </mesh>
 
       {/* Books on shelves */}
-      {books.slice(0, 3).map((book, index) => (
-        <Book
-          key={book.id}
-          book={book}
-          position={[-1.5 + index * 1.0, 0.55, 0]}
-          onHover={setHoveredBook}
-          isHovered={hoveredBook === book.id}
-          onBookClick={onBookClick}
-        />
-      ))}
-      
-      {books.slice(3, 6).map((book, index) => (
-        <Book
-          key={book.id}
-          book={book}
-          position={[-1.5 + index * 1.0, 1.05, 0]}
-          onHover={setHoveredBook}
-          isHovered={hoveredBook === book.id}
-          onBookClick={onBookClick}
-        />
-      ))}
+      {shelfBooks.map((book, index) => {
+        const row = Math.floor(index / COLS)
+        const col = index % COLS
+        const positionX = START_X + col * BOOK_SPACING
+        const positionY = ROW_HEIGHTS[row]
+        return (
+          <Book
+            key={`${book.id}-${row}-${col}`}
+            book={book}
+            position={[positionX, positionY, 0]}
+            onHover={setHoveredBook}
+            isHovered={hoveredBook === book.id}
+            onBookClick={onBookClick}
+          />
+        )
+      })}
 
       {/* Shelf label */}
       <Text
@@ -93,7 +91,7 @@ export default function Bookshelf({ position, onBookClick }: BookshelfProps) {
         anchorX="center"
         anchorY="middle"
       >
-        古典文学
+        {label}
       </Text>
     </group>
   )
