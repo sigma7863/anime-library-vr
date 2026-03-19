@@ -2,33 +2,21 @@
 
 import { useState } from 'react'
 import { Search, X } from 'lucide-react'
+import { aozoraBooks, AozoraBook } from '@/data/aozora'
 
 interface SearchPanelProps {
   isOpen: boolean
   onClose: () => void
-  onBookSelect: (bookId: string) => void
+  onBookSelect: (book: AozoraBook) => void
 }
-
-const allBooks = [
-  { id: 'book1', title: '日本の神話', author: '太安万呂', category: '神話' },
-  { id: 'book2', title: '源氏物語', author: '紫式部', category: '古典文学' },
-  { id: 'book3', title: '枕草子', author: '清少納言', category: '随筆' },
-  { id: 'book4', title: '徒然草', author: '吉田兼好', category: '随筆' },
-  { id: 'book5', title: '奥の細道', author: '松尾芭蕉', category: '俳句' },
-  { id: 'book6', title: '雨月物語', author: '上田秋成', category: '怪談' },
-  { id: 'book7', title: '竹取物語', author: '不明', category: '物語' },
-  { id: 'book8', title: '平家物語', author: '不明', category: '軍記物語' },
-  { id: 'book9', title: '方丈記', author: '鴨長明', category: '随筆' },
-  { id: 'book10', title: '更級日記', author: '菅原孝標女', category: '日記' },
-]
 
 export default function SearchPanel({ isOpen, onClose, onBookSelect }: SearchPanelProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('すべて')
 
-  const categories = ['すべて', ...Array.from(new Set(allBooks.map(book => book.category)))]
+  const categories = ['すべて', ...Array.from(new Set(aozoraBooks.map(book => book.category)))]
 
-  const filteredBooks = allBooks.filter(book => {
+  const filteredBooks = aozoraBooks.filter(book => {
     const matchesSearch = book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          book.author.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesCategory = selectedCategory === 'すべて' || book.category === selectedCategory
@@ -38,10 +26,13 @@ export default function SearchPanel({ isOpen, onClose, onBookSelect }: SearchPan
   if (!isOpen) return null
 
   return (
-    <div className="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl z-40 flex flex-col">
+    <div className="fixed top-0 right-0 h-full w-96 bg-[#FCF6EC] shadow-2xl z-40 flex flex-col border-l border-amber-200">
       {/* Header */}
-      <div className="bg-amber-900 text-white p-4 flex justify-between items-center">
-        <h2 className="text-xl font-bold">図書検索</h2>
+      <div className="bg-gradient-to-r from-amber-900 to-amber-700 text-white p-4 flex justify-between items-center">
+        <div>
+          <p className="text-xs tracking-[0.3em] uppercase opacity-70">Aozora Bunko</p>
+          <h2 className="text-xl font-bold">図書検索</h2>
+        </div>
         <button
           onClick={onClose}
           className="p-2 hover:bg-amber-800 rounded-full transition-colors"
@@ -51,7 +42,7 @@ export default function SearchPanel({ isOpen, onClose, onBookSelect }: SearchPan
       </div>
 
       {/* Search */}
-      <div className="p-4 border-b">
+      <div className="p-4 border-b border-amber-200">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
           <input
@@ -59,7 +50,7 @@ export default function SearchPanel({ isOpen, onClose, onBookSelect }: SearchPan
             placeholder="書名や著者で検索..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full pl-10 pr-4 py-2 border border-amber-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
           />
         </div>
 
@@ -67,7 +58,7 @@ export default function SearchPanel({ isOpen, onClose, onBookSelect }: SearchPan
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-full mt-3 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+          className="w-full mt-3 px-3 py-2 border border-amber-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-amber-500"
         >
           {categories.map(category => (
             <option key={category} value={category}>{category}</option>
@@ -85,9 +76,9 @@ export default function SearchPanel({ isOpen, onClose, onBookSelect }: SearchPan
           {filteredBooks.map(book => (
             <div
               key={book.id}
-              className="p-3 border rounded-lg hover:bg-amber-50 cursor-pointer transition-colors"
+              className="p-3 border border-amber-200 rounded-lg hover:bg-amber-50 cursor-pointer transition-colors"
               onClick={() => {
-                onBookSelect(book.id)
+                onBookSelect(book)
                 onClose()
               }}
             >
