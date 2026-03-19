@@ -4,18 +4,14 @@ import { useRef } from 'react'
 import { Mesh } from 'three'
 import { useFrame } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
+import { AozoraBook } from '@/data/aozora'
 
 interface BookProps {
-  book: {
-    id: string
-    title: string
-    color: string
-    author: string
-  }
+  book: AozoraBook
   position: [number, number, number]
   onHover: (bookId: string | null) => void
   isHovered: boolean
-  onBookClick: (book: any) => void
+  onBookClick: (book: AozoraBook) => void
 }
 
 export default function Book({ book, position, onHover, isHovered, onBookClick }: BookProps) {
@@ -47,6 +43,12 @@ export default function Book({ book, position, onHover, isHovered, onBookClick }
       >
         <boxGeometry args={[0.8, 1.2, 0.1]} />
         <meshStandardMaterial color={book.color} />
+      </mesh>
+
+      {/* Accent band */}
+      <mesh position={[0, -0.35, 0.055]} castShadow receiveShadow>
+        <boxGeometry args={[0.82, 0.12, 0.02]} />
+        <meshStandardMaterial color={book.accent} />
       </mesh>
       
       {/* Book spine text */}
