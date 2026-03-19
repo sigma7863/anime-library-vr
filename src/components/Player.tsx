@@ -1,12 +1,16 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useKeyboardControls } from '@react-three/drei'
 import { useControls } from 'leva'
 import * as THREE from 'three'
 
-export default function Player() {
+interface PlayerProps {
+  enabled?: boolean
+}
+
+export default function Player({ enabled = true }: PlayerProps) {
   const playerRef = useRef<THREE.Group>(null)
   const direction = useRef(new THREE.Vector3())
   const frontVector = useRef(new THREE.Vector3())
@@ -20,6 +24,7 @@ export default function Player() {
   })
 
   useFrame((state, delta) => {
+    if (!enabled) return
     if (!playerRef.current) return
 
     const { forward, backward, leftward, rightward, jump, run } = get()
