@@ -1,0 +1,133 @@
+export type AozoraBook = {
+  id: string
+  title: string
+  author: string
+  category: string
+  cardUrl: string
+  textUrl: string
+  color: string
+  accent: string
+}
+
+export const aozoraBooks: AozoraBook[] = [
+  {
+    id: 'dazai-ningen',
+    title: '人間失格',
+    author: '太宰治',
+    category: '近代文学',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000035/card301.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000035/files/301_14912.html',
+    color: '#8C3A2B',
+    accent: '#E9C9A8',
+  },
+  {
+    id: 'dazai-shayo',
+    title: '斜陽',
+    author: '太宰治',
+    category: '近代文学',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000035/card1565.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000035/files/1565_8559.html',
+    color: '#B65A3B',
+    accent: '#F1D5B5',
+  },
+  {
+    id: 'dazai-melos',
+    title: '走れメロス',
+    author: '太宰治',
+    category: '短編',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000035/card1567.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000035/files/1567_14913.html',
+    color: '#D97757',
+    accent: '#F4D4B2',
+  },
+  {
+    id: 'akutagawa-rashomon',
+    title: '羅生門',
+    author: '芥川龍之介',
+    category: '怪奇',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000879/card127.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000879/files/127_15260.html',
+    color: '#5A2E2A',
+    accent: '#E2B9A6',
+  },
+  {
+    id: 'nakajima-sangetsuki',
+    title: '山月記',
+    author: '中島敦',
+    category: '物語',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000119/card623.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000119/files/623_18353.html',
+    color: '#3B4B5A',
+    accent: '#D0D8E0',
+  },
+  {
+    id: 'miyazawa-ginga',
+    title: '銀河鉄道の夜',
+    author: '宮沢賢治',
+    category: '童話',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000081/card456.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000081/files/456_15050.html',
+    color: '#2E4A7D',
+    accent: '#D1E2F7',
+  },
+  {
+    id: 'miyazawa-restaurant',
+    title: '注文の多い料理店',
+    author: '宮沢賢治',
+    category: '童話',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000081/card1927.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000081/files/1927_17906.html',
+    color: '#2F5E4E',
+    accent: '#CFE6DB',
+  },
+  {
+    id: 'soseki-wagahai',
+    title: '吾輩は猫である',
+    author: '夏目漱石',
+    category: '長編',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000148/card789.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000148/files/789_14547.html',
+    color: '#8B6C3E',
+    accent: '#EFE2C7',
+  },
+  {
+    id: 'soseki-botchan',
+    title: '坊っちゃん',
+    author: '夏目漱石',
+    category: '長編',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000148/card50420.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000148/files/50420_14907.html',
+    color: '#A36B2C',
+    accent: '#F1DAB0',
+  },
+  {
+    id: 'edogawa-ningenisu',
+    title: '人間椅子',
+    author: '江戸川乱歩',
+    category: '怪奇',
+    cardUrl: 'https://www.aozora.gr.jp/cards/001779/card56648.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/001779/files/56648_58182.html',
+    color: '#3C2E3A',
+    accent: '#D7C3D2',
+  },
+  {
+    id: 'kajii-lemon',
+    title: '檸檬',
+    author: '梶井基次郎',
+    category: '短編',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000074/card46349.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000074/files/46349_23843.html',
+    color: '#C2A43D',
+    accent: '#F6E8AA',
+  },
+  {
+    id: 'akutagawa-hana',
+    title: '鼻',
+    author: '芥川龍之介',
+    category: '短編',
+    cardUrl: 'https://www.aozora.gr.jp/cards/000879/card42.html',
+    textUrl: 'https://www.aozora.gr.jp/cards/000879/files/42_15228.html',
+    color: '#5C3E27',
+    accent: '#E6CBB0',
+  },
+]
